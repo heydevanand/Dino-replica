@@ -2,7 +2,7 @@ import {getProperty, setProperty, incrementProperty} from '/scripts/updateProper
 
 const dino = document.querySelector('[data-dino]');
 const JUMP_SPEED = 0.45;
-const GRAVITY = -0.002;
+const GRAVITY = -0.0018;
 const FRAME_COUNT = 2;
 const FRAME_TIME = 100;
 
@@ -28,6 +28,16 @@ export function updateDino(delta,speedScale)
 	handleJump(delta);
 }
 
+export function getDinoRect()
+{
+	return dino.getBoundingClientRect();
+}
+
+export function setDinoLose()
+{
+	dino.src = 'images/dino-lose.png';
+}
+
 function handleJump(delta)
 {
 	if(!isJumping) return;
@@ -44,8 +54,8 @@ function onJump(e)
 {
 	if(e.code == 'Space' && isJumping == false)
 	{
-		const jumpAudio = new Audio('/sounds/jump.wav');
-		jumpAudio.play();
+		const ping = new Audio('/sounds/ping.mp3');
+		ping.play();
 		velocity = JUMP_SPEED;
 		isJumping = true;
 	}

@@ -1,6 +1,6 @@
 import {updateGround, setupGround} from '/scripts/ground.js'
-import {updateDino, setupDino} from '/scripts/dino.js'
-import {updateCactus, setupCactus} from '/scripts/cactus.js'
+import {updateDino, setupDino, getDinoRect, setDinoLose} from '/scripts/dino.js'
+import {updateCactus, setupCactus, getCactusRects} from '/scripts/cactus.js'
 
 const BOARD_WIDTH = 100;
 const BOARD_HEIGHT = 30;
@@ -9,8 +9,9 @@ const SPEED_SCALE_INCREASE = 0.00001;
 const boardElement = document.querySelector('[data-board]');
 const scoreElement = document.querySelector('[data-score]');
 const startElement = document.querySelector('[data-start]');
-const startAudio = new Audio('/sounds/start.mp3');
+const ping = new Audio('/sounds/ping.mp3');
 const achieveAudio = new Audio('/sounds/achieve.wav');
+const end = new Audio('/sounds/end.wav');
 
 let speedScale;
 let score;
@@ -34,7 +35,7 @@ function start()
 	setupGround();
 	setupDino();
 	setupCactus();
-	startAudio.play();
+	ping.play();
 	startElement.classList.add('hide');
 	window.requestAnimationFrame(update);
 }
@@ -53,6 +54,7 @@ function update(time)
 	updateCactus(delta,speedScale);
 	updateSpeedScale(delta);
 	updateScore(delta);
+	if(checkLose()) return handleLose();
 	lastTime = time;
 	window.requestAnimationFrame(update);
 }
@@ -71,6 +73,33 @@ function updateScore(delta)
 	{
 		achieveAudio.play();
 	}
+}
+
+function checkLose()
+{
+	const dinoRect = getDinoRect();
+	return getCactusRects().some(rect => isCollision(rect, dinoRect))
+}
+
+function isCollision(rect1, rect2)
+{
+	// console.log(`Dino :\nTop: ${rect2.top}\nBottom: ${rect2.bottom}\nLeft: ${rect2.left}\nRight: ${rect2.right}`);
+	return (
+		rect1.left +10 < rect2.right -10 &&
+		rect1.right -10 > rect2.left +5 &&
+		rect1.top +10 < rect2.bottom -10 &&
+		rect1.bottom > rect2.top
+	)
+}
+
+function handleLose()
+{
+	setDinoLose();
+	end.play();
+	setTimeout(() => {
+		document.addEventListener('keypress', start, { once: true });
+	}, 300);
+	startElement.classList.remove('hide');
 }
 
 function setPixelToBoardScale()
