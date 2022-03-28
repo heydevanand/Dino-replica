@@ -1,11 +1,13 @@
-import { incrementProperty, setProperty, getProperty } from '/scripts/updateProperty.js'
+import {incrementProperty, setProperty, getProperty} from '/scripts/updateProperty.js'
 
 const groundElements = document.querySelectorAll('[data-ground]');
 
-let speed = 0.05;
+const speed = 0.05;
 
 export function setupGround()
 {
+	groundElements[0].classList.remove('hide');
+	groundElements[1].classList.remove('hide');
 	setProperty(groundElements[0], '--left', 0);
 	setProperty(groundElements[1], '--left', 300);
 }
