@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+*::before, *::after {
+	box-sizing: border-box;
+	user-select: none;
+}
+
+body {
+	font-family: 'Press Start 2P', cursive;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+}
+
+.board {
+	overflow: hidden;
+	position: relative;
+}
+
+.score {
+	position: absolute;
+	font-size: 1.5em;
+	right: 1vmin;
+}
+
+.start {
+	position: absolute;
+	font-size: 1em;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.hide {
+	display: none;
+}
+
+.ground {
+	--left: 0;
+	position: absolute;
+	bottom: 0;
+	width: 300%;
+	bottom: 0;
+	left: calc(var(--left) * 1%);
+}
+
+.dino {
+	--bottom: 0;
+	position: absolute;
+	left: 1vmin;
+	height: 30%;
+	bottom: calc(var(--bottom) * 1%);
+}
+
+.cactus {
+	position: absolute;
+	height: 30%;
+	left: calc(var(--left) * 1%);
+	bottom: 0;
+}
