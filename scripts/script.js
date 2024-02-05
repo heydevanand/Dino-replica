@@ -9,9 +9,15 @@ const SPEED_SCALE_INCREASE = 0.00001;
 const boardElement = document.querySelector('[data-board]');
 const scoreElement = document.querySelector('[data-score]');
 const startElement = document.querySelector('[data-start]');
+<<<<<<< HEAD
 const ping = new Audio('/sounds/ping.mp3');
 const achieveAudio = new Audio('/sounds/achieve.wav');
 const end = new Audio('/sounds/end.wav');
+=======
+const ping = new Audio('./sounds/ping.mp3');
+const achieveAudio = new Audio('./sounds/achieve.wav');
+const end = new Audio('./sounds/end.wav');
+>>>>>>> c4194d2a917f85d1c7e53f52e74db26839fb092a
 
 let speedScale;
 let score;

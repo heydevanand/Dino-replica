@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import {incrementProperty, setProperty, getProperty} from '/scripts/updateProperty.js'
+=======
+import {incrementProperty, setProperty, getProperty} from './updateProperty.js'
+>>>>>>> c4194d2a917f85d1c7e53f52e74db26839fb092a
 
 const groundElements = document.querySelectorAll('[data-ground]');
 
